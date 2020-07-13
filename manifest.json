@@ -1,0 +1,23 @@
+{
+
+  "manifest_version": 2,
+  "name": "UrlShortener",
+  "version": "1.0",
+
+  "description": "Basic",
+  "homepage_url": "http://perma.com",
+  "icons": {
+    "48": "icons/beasts-48.png",
+    "96": "icons/beasts-96.png"
+  },
+
+  "permissions": [
+    "activeTab"
+  ],
+
+  "browser_action": {
+    "default_icon": "icons/beasts-32.png",
+    "default_title": "UrlShortener",
+    "default_popup": "popup/main.html"
+  }
+}

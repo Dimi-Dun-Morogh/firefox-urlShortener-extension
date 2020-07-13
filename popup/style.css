@@ -1,0 +1,25 @@
+html, body {
+  width: 500px;
+}
+
+.form {
+  width: 100%;
+}
+.form input {
+  display: block;
+  width: 60%;
+}
+.form .btn {
+  width: 60%;
+}
+.history ul {
+  padding:  0 20px;
+}
+.history li {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+.history li span {
+  display: inline-block;
+}
