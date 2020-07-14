@@ -13,14 +13,14 @@ const APP_UI = {
   historyBlock: document.querySelector(".history").querySelector("ul"),
   historyWrap: document.querySelector(".history"),
   spinner: document.querySelector(".spinner-border"),
-  formCopywrap: document.querySelector(".form__copy-wrap")
+  formCopywrap: document.querySelector(".form__copy-wrap"),
 };
 
 const shortener = {
-  history: JSON.parse(localStorage.getItem("shortenerHistory")) ||[],
+  history: JSON.parse(localStorage.getItem("shortenerHistory")) || [],
   shortenUrl: async function (url) {
     try {
-      APP_UI.spinner.classList.add("d-block")
+      APP_UI.spinner.classList.add("d-block");
       const response = await fetch(API_ENV.apiUrl, {
         method: "POST",
         headers: {
@@ -30,19 +30,18 @@ const shortener = {
           url: url,
         }),
       });
-      if(response.status === 400) {
-        shortener.showError()
+      if (response.status === 400) {
+        shortener.showError();
         return Promise.reject();
       }
       let responseObj = await response.json();
       console.log(responseObj);
       return shortener.serializeResponse(responseObj);
     } catch (error) {
-console.log(error)
+      console.log(error);
+    } finally {
+      APP_UI.spinner.classList.remove("d-block");
     }
-finally {
-  APP_UI.spinner.classList.remove("d-block");
-}
   },
   serializeResponse: function (data) {
     return {
@@ -64,25 +63,24 @@ finally {
     if (shortener.history.length > 5) shortener.history.shift();
     localStorage.setItem("shortenerHistory", JSON.stringify(shortener.history));
   },
-  inithistory:function() {
-    if(shortener.history.length) {
-      APP_UI.historyWrap.classList.add("d-block")
-      shortener.history.forEach(item=>{
+  inithistory: function () {
+    if (shortener.history.length) {
+      APP_UI.historyWrap.classList.add("d-block");
+      shortener.history.forEach((item) => {
         let template = shortener.historyTemplate(item);
         APP_UI.historyBlock.insertAdjacentHTML("afterbegin", template);
-
-      })
+      });
     }
   },
-  showError: function() {
-      $(APP_UI.shortenInput).popover('show');
-      setTimeout(3000,()=>{
-        shortener.hideError();
-      })
+  showError: function () {
+    $(APP_UI.shortenInput).popover("show");
+    setTimeout(3000, () => {
+      shortener.hideError();
+    });
   },
-  hideError: function() {
-    $(APP_UI.shortenInput).popover("dispose")
-  }
+  hideError: function () {
+    $(APP_UI.shortenInput).popover("dispose");
+  },
 };
 
 // shortener
@@ -111,34 +109,61 @@ APP_UI.shortenButton.addEventListener("click", async (e) => {
   const url = APP_UI.shortenInput.value;
   const responseObj = await shortener.shortenUrl(url);
   const newLi = shortener.historyTemplate(responseObj);
-  APP_UI.formCopywrap.classList.add("d-block")
+  APP_UI.formCopywrap.classList.add("d-block");
   APP_UI.copyInput.value = responseObj.newUrl;
   APP_UI.historyBlock.insertAdjacentHTML("afterbegin", newLi);
-  APP_UI.historyWrap.classList.add("d-block")
+  APP_UI.historyWrap.classList.add("d-block");
   shortener.saveAndUpdateLocalStorage(responseObj);
+  $(".fa-copy").tooltip({
+    //init tooptip for new history unit
+    title: "Copied!",
+    trigger: "click",
+  });
 });
 //? copy from  copy input
+$(APP_UI.copyButton).tooltip({
+  //init tooptip
+  title: "Copied!",
+  trigger: "click",
+});
 APP_UI.copyButton.addEventListener("click", (e) => {
   copytext(APP_UI.copyInput.value);
-  $(APP_UI.copyInput).effect({
-    "effect":"highlight",
-    "duration": "1900"
-  })
+  APP_UI.copyInput.classList.add("bg-success", "text-white");
 
+  setTimeout(() => {
+    APP_UI.copyInput.classList.remove("bg-success", "text-white");
+    $(APP_UI.copyButton).tooltip("hide");
+  }, 500);
 });
 //? copy from history
+$(".fa-copy").tooltip({
+  //init tooptip
+  title: "Copied!",
+  trigger: "click",
+});
 APP_UI.historyBlock.addEventListener("click", (e) => {
   if (e.target.classList.contains("fa-copy")) {
+
     const url = e.target.parentNode.parentElement.textContent;
     copytext(url);
-    $(e.target.parentNode.parentElement).effect({
-      "effect":"bounce"
-    })
+    e.target.parentNode.parentElement.childNodes[0].classList.add(
+      "bg-success",
+      "text-white",
+    );
+    setTimeout(() => {
+      e.target.parentNode.parentElement.childNodes[0].classList.remove(
+        "bg-success",
+        "text-white",
+      );
+      $(e.target).tooltip("hide");
+    }, 500);
   }
 });
 
 //hide popopver
-APP_UI.shortenInput.addEventListener("focus",(e)=>{
- shortener.hideError();
+APP_UI.shortenInput.addEventListener("focus", (e) => {
+  shortener.hideError();
+});
 
-})
+
+//  moz-extension://a61193df-cf25-4a26-bd4c-e945c299a3e9/_generated_background_page.html
