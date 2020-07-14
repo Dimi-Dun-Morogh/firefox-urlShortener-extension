@@ -5,24 +5,29 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css"/>
 <!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="jquery-3.5.1.min.js"></script>
+<!-- jQUery Ui -->
+<link rel="stylesheet" href="jquery-ui.css">
+<script src="jquery-ui.min.js"></script>
   </head>
 
   <body>
     <h3 class="text-center">Welcome to URL shortener</h3>
     <div class="form">
-      <div class="form__search-wrap">
-        <input type="text" name="" id="" class="form-control mx-auto mb-1 mt-3">
-        <button type="button" class="btn btn-success d-block  mx-auto">Go</button>
+      <div class="form__shorten-wrap">
+        <div class="spinner-border"></div>
+        <input type="text" name=""  class="form-control mx-auto mb-1 mt-1"
+         data-content="Enter Valid URL"
+        >
+        <button type="button" class="btn btn-success d-block  mx-auto">Shorten</button>
       </div>
       <div class="form__copy-wrap">
-        <input type="text" name="" id="" class="form-control mx-auto mb-1 mt-3">
+        <input type="text" name=""  class="form-control mx-auto mb-1 mt-3">
         <button type="button" class="btn btn-success d-block  mx-auto">Copy</button>
       </div>
     </div>
     <div class="history mt-5">
       <ul>
-        <li><span class="mr-auto">http://oldlongassurl..</span> <span  class="ml-auto"><a href="#">http://newshortie.com</a><span class=""><i class="far fa-copy"></i></span></span> </li>
       </ul>
     </div>
     <script src="bootstrap/bootstrap.bundle.min.js"></script>

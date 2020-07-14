@@ -1,25 +1,100 @@
-html, body {
+@font-face {
+  font-family: 'Italianno-Regular';
+  src: url("fonts/Italianno-Regular.ttf");
+}
+
+@font-face {
+  font-family: 'Montserrat-SemiBold';
+  src: url("fonts/Montserrat-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: 'Montserrat-Medium';
+  src: url("fonts/Montserrat-Medium.ttf");
+}
+
+html,
+body {
   width: 500px;
+}
+
+body {
+  background-image: url("img/unnamed.jpg");
+}
+
+h3 {
+  font-family: 'Italianno-Regular';
+  font-size: 35px;
+  margin-bottom: 0px;
+  margin-top: 10px;
+
 }
 
 .form {
   width: 100%;
 }
+
 .form input {
   display: block;
   width: 60%;
 }
+
 .form .btn {
   width: 60%;
 }
-.history ul {
-  padding:  0 20px;
+
+.form__copy-wrap {
+  display: none;
 }
+
+.history {
+  background-color: white;
+  padding: 10px 0;
+  border-radius: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  display: none;
+
+}
+
+.history ul {
+  padding: 0 20px;
+
+}
+
 .history li {
   list-style: none;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  font-family: 'Montserrat-Medium';
+  font-size: 15px;
 }
+
 .history li span {
   display: inline-block;
+}
+
+.history .old-url {
+  font-size: 12px;
+}
+
+.icon-copy,
+.fa-copy {
+  cursor: pointer;
+}
+
+.fa-copy {
+  margin-left: 10px;
+}
+
+.spinner-border {
+  display: block;
+  position: absolute;
+  right: 47%;
+  top: 60px;
+  display: none;
+}
+
+.popover-body {
+  color: #f80a0a
 }
