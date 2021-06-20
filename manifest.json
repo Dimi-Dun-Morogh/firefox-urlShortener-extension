@@ -1,8 +1,8 @@
 {
 
   "manifest_version": 2,
-  "name": "UrlShortener",
-  "version": "1.0",
+  "name": "Url shortener",
+  "version": "1.0.1",
 
   "description": "Basic addon to shorten URLS. It will store 5 last shorted URLs in local storage",
   "icons": {
